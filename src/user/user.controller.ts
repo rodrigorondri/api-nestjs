@@ -7,8 +7,8 @@ import { UpdatePatchUserDTO } from "./DTO/update-patch-user.dto";
 export class UserController {
 
     @Post()
-    async create(@Body() body: CreateUserDTO){
-        return {body};
+    async create(@Body() nome,email,password: CreateUserDTO){
+        return {nome,email,password};
     }
 
     @Get()
