@@ -22,10 +22,10 @@ export class UserController {
     }
 
     @Put(':id')
-    async update(@Body() body: UpdatePutUserDTO,@Param('id',ParseIntPipe) id: number){
+    async update(@Body() nome,email,password: UpdatePutUserDTO,@Param('id',ParseIntPipe) id: number){
         return {
             methd: 'put',
-            body,
+            nome,email,password,
             id
         }
     }
