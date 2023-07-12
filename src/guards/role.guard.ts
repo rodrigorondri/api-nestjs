@@ -22,6 +22,8 @@ constructor(
 
     const {user} = context.switchToHttp().getRequest();
 
-    return true;
+    const roleFiltred = requiredRoles.filter(role => role === user.role);
+
+    return roleFiltred.length > 0;
  }
 }

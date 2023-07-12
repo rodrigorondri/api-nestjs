@@ -11,6 +11,7 @@ import { RoleGuard } from "src/guards/role.guard";
 import { AuthGuard } from "src/guards/auth.guard";
 
 
+@Roles(Role.Admin)
 @UseGuards(AuthGuard,RoleGuard)
 @Controller('users')
 export class UserController {
@@ -18,37 +19,33 @@ export class UserController {
     constructor(private readonly userService: UserService){}
 
     @UseInterceptors(LogInterceptor)
-    @Roles(Role.Admin)
     @Post()
     async create(@Body() data: CreateUserDTO){
+        console.log(data);
         return await this.userService.create(data);
     }
 
-    @Roles(Role.Admin)
+    @Roles(Role.User)
     @Get()
     async list(){
         return await this.userService.list();
     }
 
-    @Roles(Role.Admin)
     @Get(':id')
     async show(@ParamId() id: number){
         return await this.userService.show(id);
     }
 
-    @Roles(Role.Admin)
     @Put(':id')
     async update(@Body() data: UpdatePutUserDTO,@Param('id',ParseIntPipe) id: number){
         return this.userService.update(id,data);
     }
 
-    @Roles(Role.Admin)
     @Patch(':id')
     async updatePartial(@Body() data: UpdatePatchUserDTO, @Param('id',ParseIntPipe) id: number){
         return this.userService.updatePartial(id,data);
     }
 
-    @Roles(Role.Admin)
     @Delete(':id')
     async delete(@Param('id',ParseIntPipe) id: number){
         return await this.userService.delete(id);
